@@ -16,7 +16,7 @@
 
 凡是遇到类似问题，括号里面会是一些版本号。这通常代表的意思是Ubuntu自生安装的软件包版本高，而所安装软件的依赖包版本低的原因。
 
-![image-20200302214043261](image-20200302214043261.png)
+![image-20200302214043261](img/image-20200302214043261.png)
 
 解决：
 
@@ -48,9 +48,9 @@ sudo apt-get install gdb
 
 ② 安装所需插件。
 
-![img](20190517014547281.png)
+![img](img/20190517014547281.png)
 
-![img](20190517014618572.png)
+![img](img/20190517014618572.png)
 
 ③ 编写hello.cpp测试。
 
@@ -72,13 +72,13 @@ F6 运行
 
 使用快捷键 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>T</kbd> 打开终端（或者在桌面上右击-打开终端，后文直接称为 **打开终端**）。在终端输入`software-properties-gtk`，回车即可打开软件和更新。
 
-![image-20200302222238267](image-20200302222238267.png)
+![image-20200302222238267](img/image-20200302222238267.png)
 
 点击 **下载自** 右边的下拉框，选择 **其他站点**。在弹出的界面中点击**选择最佳服务器**。
 
-![image-20200302222330789](image-20200302222330789.png)
+![image-20200302222330789](img/image-20200302222330789.png)
 
-![image-20200302222413908](image-20200302222413908.png)
+![image-20200302222413908](img/image-20200302222413908.png)
 
 等待测试完成后点击**选择服务器**，完成后输入当前用户密码，重新载入软件包缓存。
 
@@ -112,14 +112,14 @@ sudo apt upgrade	#更新所有软件
 
 打开终端，执行 `gedit ~/.config/user-dirs.dirs` 打开用户目录配置文件。
 
-![img](v2-efd5d063e528acf98a40bdfa66b0eeff_hd.jpg)
+![img](img/v2-efd5d063e528acf98a40bdfa66b0eeff_hd.jpg)
 
 修改该文件，将中文目录修改为对应的英文名称。
 
 然后打开文件管理器（点击左栏第二个图标，或在终端输入`nautilus ~`），将**文件管理器**中的对应目录修改为对应的英文名，再重启电脑。
 **注意上文有两次修改！！**
 
-![img](v2-36755b5bd2c9a3e2eda3d878b0acf02a_hd.jpg)
+![img](img/v2-36755b5bd2c9a3e2eda3d878b0acf02a_hd.jpg)
 
 
 
@@ -273,6 +273,68 @@ sudo apt-get remove 内核文件名 （例如：linux-image-2.6.27-2-generic）
 
 9. dpkg：是专门为“Debian”开发的套件管理系统（ubuntu基于Debian），方便软件的安装、更新及移除。dpkg 不能自动解决依赖关系。使用dpkg安装deb包的方式是：`sudo dpkg -i xxx.deb`。
    在dpkg安装出现依赖问题的时候，使用 `sudo apt -f install` 有可能可以解决依赖关系（如果所依赖的软件包在软件源中都能找到）。
+
+
+
+
+
+# Manjaro 使用技巧
+
+## 安装程序
+
+使用命令 
+
+```bash
+pacman -S appname
+```
+
+## 更新源
+
+```bash
+pacman -Sy
+```
+
+## 安装yay
+
+使用下列命令安装yay。
+
+```bash
+pacman -S yay
+```
+
+> 管理软件包都是使用官方为我们提供的`pacman`，软件包的来源都是官方。但是`Arch`拥有一个强大的用户库`AUR`即[Arch User Repository](https://wiki.archlinux.org/index.php/Arch_User_Repository)，为我们提供了官方包之外的各种软件包，一些闭源的软件包也可以在上面找到，可以说`AUR`极大地丰富了软件包的种类与数量，并可以配合`yay`这样的工具为用户省下大量安装、更新软件包的时间。
+>
+> `yay`实际上也是一个软件包，我们可以把它看成是对`pacman`的包装，它兼容`pacman`的所有操作，最大的不同是我们可以用它方便地安装与管理`AUR`中的包，下面的许多软件包都是在`AUR`库中的，也都是使用`AUR`来安装的。
+
+
+
+
+
+## Arch Linux包管理器pacman基本用法
+
+|                        功能                        |                  示例                   |
+| :------------------------------------------------: | :-------------------------------------: |
+|                查询pacman主功能用法                |              pacman --help              |
+|                查询pacman子功能用法                |              pacman -Q -h               |
+|                   本地安装软件包                   | pacman -U linux-3.5.4-1-i686.pkg.tar.xz |
+|                     源信息更新                     |               pacman -Sy                |
+|                    软件随源升级                    |               pacman -Syu               |
+|                   从源中查找软件                   |            pacman -Ss linux             |
+|                   从源中下载软件                   |            pacman -Sw linux             |
+|                   从源中安装软件                   |             pacman -S linux             |
+| 删除软件（包括该软件依赖但是未被其他软件依赖的包） |             pacman -R linux             |
+|       删除/var/cache/pacman/pkg/*中未安装包        |               pacman -Sc                |
+|        删除/var/cache/pacman/pkg/*中所有包         |               pacman -Scc               |
+|               本地查询所有已安装软件               |                pacman -Q                |
+|              本地查询单个软件版本信息              |             pacman -Q linux             |
+|               本地查看单个软件包内容               |            pacman -Ql linux             |
+|              从源中查询软件组包含软件              |            pacman -Sg gnome             |
+
+## AUR软件源
+
+https://aur.archlinux.org/
+
+
 
 
 
