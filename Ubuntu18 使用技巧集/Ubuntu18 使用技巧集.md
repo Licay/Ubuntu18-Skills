@@ -237,7 +237,99 @@ sudo apt-get remove 内核文件名 （例如：linux-image-2.6.27-2-generic）
 
 
 
+### 安装miniconda与tensorflow
 
+miniconda下载https://docs.conda.io/en/latest/miniconda.html
+
+根据需求安装。
+
+![image-20200324113400833](img/image-20200324113400833.png)
+
+**注意：安装不需要sudo否则安装无效！！**
+
+#### TensorFlow
+
+1，添加conda的清华镜像源
+
+```bash
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ 
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ 
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/ 
+conda config --set show_channel_urls yes
+```
+
+2，安装tensorflow
+
+```bash
+conda install tensorflow
+```
+
+
+
+### Jupyter Notebook介绍、安装及使用教程
+
+https://www.jianshu.com/p/91365f343585
+
+使用conda安装
+
+```bash
+conda install jupyter notebook
+```
+
+启动
+
+```bash
+jupyter notebook
+```
+
+### zsh美化
+
+#### 安装oh-my-zsh及插件
+
+```bash
+$ sudo pacman -S zsh
+$ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+```
+
+安装插件：
+
+```bash
+$ git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
+
+$ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
+
+$ git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/plugins/zsh-autosuggestions
+
+$ vim ~/.zshrc
+  # edit plugins & save
+  plugins=(git zsh-syntax-highlighting docker docker-compose zsh-autosuggestions zsh-completions)
+
+$ autoload -U compinit && compinit
+```
+
+
+
+#### 安装powerlevel10k主题
+
+![Powerlevel10k](img/prompt-styles-high-contrast.png)
+
+![Powerlevel10k Configuration Wizard](https://raw.githubusercontent.com/romkatv/powerlevel10k-media/master/configuration-wizard.gif)
+
+> 主页：https://github.com/romkatv/powerlevel10k#oh-my-zsh
+
+##### Oh My Zsh
+
+```
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+```
+
+Set `ZSH_THEME="powerlevel10k/powerlevel10k"` in `~/.zshrc`.
+
+
+
+### Linux主题
+
+外观主题是Nordic theme，可以从观感直接[下载](https://link.zhihu.com/?target=https%3A//store.kde.org/p/1267246)使用，界面的颜色就会如上图所示。图标使用的是[Papirus](https://link.zhihu.com/?target=https%3A//store.kde.org/p/1166289)系列，看起来也比较和谐。
 
 
 
@@ -336,7 +428,35 @@ https://aur.archlinux.org/
 
 
 
+## Manjaro安装arm-linux-gcc
 
+```bash
+yay -S arm-linux-gnueabihf-gcc
+```
+
+### RIME
+
+RIME 中州韵输入法是 Linux 下广受好评的中文输入法。鉴于搜狗输入法的 bug 不断（QT4），笔者更推荐 RIME 来作为中文输入法。
+
+```bash
+$ sudo pacman -S fcitx-rime fcitx-cloudpinyin fcitx-googlepinyin kcm-fcitx 
+```
+
+
+
+## Manjaro挂载共享文件夹
+
+manjaro默认安装了open-vm-tools，我们只需要挂载的共享文件：
+
+```bash
+sudo /usr/bin/vmhgfs-fuse -o allow_other -o auto_unmount /mnt/hgfs
+```
+
+这样就可以在/mnt/hgfs下看到共享文件夹了
+
+
+
+# TensorFlow学习
 
 
 
