@@ -434,12 +434,12 @@ https://aur.archlinux.org/
 yay -S arm-linux-gnueabihf-gcc
 ```
 
-### RIME
+## RIME
 
 RIME 中州韵输入法是 Linux 下广受好评的中文输入法。鉴于搜狗输入法的 bug 不断（QT4），笔者更推荐 RIME 来作为中文输入法。
 
 ```bash
-$ sudo pacman -S fcitx-rime fcitx-cloudpinyin fcitx-googlepinyin kcm-fcitx 
+sudo pacman -S fcitx-rime fcitx-cloudpinyin fcitx-googlepinyin kcm-fcitx fcitx-configtool
 ```
 
 
@@ -456,7 +456,160 @@ sudo /usr/bin/vmhgfs-fuse -o allow_other -o auto_unmount /mnt/hgfs
 
 
 
+## manjaro 开启sshd
+
+安装好manjaro后想要开启远程ssh登录的功能，操作方式和archLinux是一样的
+
+```bash
+systemctl enable sshd.service	#开机启动
+
+systemctl start sshd.service	#立即启动
+
+systemctl restart sshd.service	#立即重启
+```
+
+
+
+
+
+
+
+
+
+
+
 # TensorFlow学习
+
+## 安装Jupyter Notebook
+
+参考：https://www.jianshu.com/p/91365f343585
+
+```bash
+conda install jupyter 		#安装
+jupyter notebook			#启动
+```
+
+**退出：** <kbd>Ctrl</kbd>+<kbd>C</kbd>
+
+### Juypter Notebook使用conda的不同环境
+
+在anaconda中创建多个环境时，发现jupyter notebook中无法找到虚拟环境的kernel，一个方法是在虚拟环境中再装一个notebook。第二个方法是只在虚拟环境中安装kernel模块。
+
+> 1. 在主环境root中安装nb_conda
+>
+> ```bash
+> conda install nb_conda
+> ```
+>
+> 2. 切换到虚拟环境中，我这里的虚拟环境名是test2，然后在cmd中输入activate切换到指定虚拟环境
+>
+> ```bash
+> conda activate test2
+> ```
+>
+> 3. 在虚拟环境中使用conda安装ipykernel
+>
+> ```bash
+> conda install ipykernel
+> ```
+>
+> 然后重启notebook就可以看到这个虚拟环境的kernel了。
+
+查看jupyter notebook kernel
+
+```
+jupyter kernelspec list
+```
+
+jupyter删除内核
+
+```
+jupyter kernelspec remove kernelname
+```
+
+
+
+
+
+
+
+## 安装多个TF环境
+
+### Anaconda的常用命令
+
+```bash
+$ # 创建一个名为tensotflow的环境，指定Python版本是2.7（不用管是2.7.x，conda会为我们自动寻找2.7.x中的最新版本）
+$ conda create --name tensotflow python=2.7  # 这里的--name可以简化为-n
+
+$ conda activate tensotflow  # 安装好后，使用activate激活某个环境
+$ # 激活后，会发现terminal输入的地方多了tensotflow 的字样
+
+$ # 此时，可以安装和操作一些包
+
+$ conda deactivate tensotflow   # 如果想返回普通环境，运行
+
+$ conda remove --name tensotflow --all  # 删除一个已有的环境
+
+
+$ # conda的包管理类似pip
+
+$ conda install scipy  # conda安装scipy
+
+$ conda list  # 查看已经安装的packages
+
+$ conda list -n tensotflow   # 查看某个指定环境的已安装包
+
+$ conda search numpy  # 查找package信息
+
+$ conda install -n tensotflow numpy  # 安装某个指定环境的package
+$ # 如果不用-n指定环境名称，则被安装在当前活跃环境，也可以通过-c指定通过某个channel安装
+
+$ conda update -n tensotflow numpy  # 更新package
+
+$ conda remove -n tensotflow numpy  # 删除package
+
+conda clean -p      # 删除没有用的包 --packages
+conda clean -t      # 删除tar打包 --tarballs
+conda clean -y -all # 删除所有的安装包及cache(索引缓存、锁定文件、未使用过的包和tar包)
+
+```
+
+## 创建环境并安装指定版本tensorflow
+
+```bash
+conda create -n tf1 python=3.5 tensorflow=1.0.1 
+```
+
+完成效果图如下
+
+![image-20200326183609473](img/image-20200326183609473.png)
+
+检查版本是否正确
+
+```bash
+conda activate tf1			#激活环境
+python						#查看Python版本
+
+#查看tensorflow版本
+>>> import tensorflow		
+>>> tensorflow.__version__
+```
+
+![image-20200326183946951](img/image-20200326183946951.png)
+
+
+
+## 使用到的模块
+
+```python
+conda install name		#安装命令
+numpy		#数学工具
+matplotlib	#画图工具
+```
+
+
+
+
 
 
 
